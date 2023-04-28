@@ -7,7 +7,6 @@ class OnlyOnePointerRecognizer extends OneSequenceGestureRecognizer {
   @override
   void addPointer(PointerDownEvent event) {
     startTrackingPointer(event.pointer);
-
     if (_p == 0) {
       resolve(GestureDisposition.rejected);
       _p = event.pointer;
@@ -31,15 +30,18 @@ class OnlyOnePointerRecognizer extends OneSequenceGestureRecognizer {
 }
 
 class OnlyOnePointerRecognizerWidget extends StatelessWidget {
-  const OnlyOnePointerRecognizerWidget({super.key});
+  const OnlyOnePointerRecognizerWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return RawGestureDetector(gestures: <Type, GestureRecognizerFactory>{
-      OnlyOnePointerRecognizer:
-          GestureRecognizerFactoryWithHandlers<OnlyOnePointerRecognizer>(
-              () => OnlyOnePointerRecognizer(),
-              (OnlyOnePointerRecognizer instance) {})
-    });
+    return RawGestureDetector(
+      gestures: <Type, GestureRecognizerFactory>{
+        OnlyOnePointerRecognizer:
+            GestureRecognizerFactoryWithHandlers<OnlyOnePointerRecognizer>(
+          () => OnlyOnePointerRecognizer(),
+          (OnlyOnePointerRecognizer instance) {},
+        ),
+      },
+    );
   }
 }

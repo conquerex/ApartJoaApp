@@ -16,7 +16,7 @@ void main() async {
 
   runApp(
     const MaterialApp(
-      home: WebViewMain(),
+      home: SafeArea(child: WebViewMain()),
     ),
   );
 }
