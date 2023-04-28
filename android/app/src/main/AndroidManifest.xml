@@ -2,9 +2,9 @@
     package="app.aptjoa.apart_joa_app">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="apart_joa_app"
+        android:label="아파트조아"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_logo"
         android:usesCleartextTraffic="true">
         <activity
             android:name="app.aptjoa.apart_joa_app.MainActivity"
