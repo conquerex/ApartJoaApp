@@ -23,7 +23,7 @@ class _WebViewMainState extends State<WebViewMain> {
 
   //home으로 가는 버튼 함수
   void goHome() {
-    controller.loadRequest(Uri.parse('http://43.200.37.141/user/login/'));
+    controller.loadRequest(Uri.parse('https://aptjoa.com/user/login'));
   }
 
 // 앱 나가기 전 dialog

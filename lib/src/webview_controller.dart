@@ -25,7 +25,7 @@ class WebviewMainController extends GetxController {
         },
       ),
     )
-    ..loadRequest(Uri.parse('http://43.200.37.141/user/login/')); // => 웹뷰에 연결할 URL
+    ..loadRequest(Uri.parse('https://aptjoa.com/user/login')); // => 웹뷰에 연결할 URL
 
   WebViewController getController() {
     return controller;
