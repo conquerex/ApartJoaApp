@@ -42,9 +42,9 @@ class WebviewMainController extends GetxController {
           },
           onPageFinished: (String url) {
             logger.d(">>>>>>>> onPageFINISHED url : $url");
-            if (url.contains('https://aptjoa.com/category/selectCategory')) {
-              testClear();
-            }
+            // if (url.contains('https://aptjoa.com/category/selectCategory')) {
+            //   testClear();
+            // }
             if (url == basicUrl || url == emptyUrl) {
               updatePrefs();
             }
