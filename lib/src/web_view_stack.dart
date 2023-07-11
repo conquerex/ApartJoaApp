@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:apart_joa_app/src/webview_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'only_one_pointer_recognizer_widget.dart';
@@ -13,17 +17,26 @@ class WebViewMain extends StatefulWidget {
 
 class _WebViewMainState extends State<WebViewMain> {
   final controller = WebviewMainController.to.getController();
+  final logger = Logger();
 
   @override
   void initState() {
     super.initState();
-    goHome();
+    // setToken();
     controller.enableZoom(false);
   }
 
-  //home으로 가는 버튼 함수
-  void goHome() {
-    controller.loadRequest(Uri.parse('https://aptjoa.com/user/login'));
+  Future<void> setToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var prefsToken = prefs.getString('login-token');
+    if (prefsToken != null && prefsToken.isNotEmpty) {
+      // 로그아웃 + SharedPreferences에 token이 있을 때
+      logger.d(">>> token : $prefsToken");
+      // var script = 'localStorage.setItem("login-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoi7IaQ7KKF6rWtIiwiYXB0Q29kZSI6ImdoaCIsInJvbGVJZCI6IlNZU1RFTSIsImV4cCI6MTY4ODk3MTc0Nn0.JWrW0_maa6BN7cY8SDCIuhCRiLkBs6VvGnYlm7kx7KQ")';
+      var script = 'localStorage.setItem("login-token", $prefsToken)';
+      logger.d(">>> script : $script");
+      controller.runJavaScript(script);
+    }
   }
 
 // 앱 나가기 전 dialog
@@ -62,6 +75,7 @@ class _WebViewMainState extends State<WebViewMain> {
 
   @override
   Widget build(BuildContext context) {
+    // setToken();
     return Scaffold(
       body: Stack(
         children: [
