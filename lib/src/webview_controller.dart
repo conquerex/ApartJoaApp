@@ -8,10 +8,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 /// -> localStorage에 token 정보가 없음을 의미함. 숫자 10은 큰 의미 없음
 class WebviewMainController extends GetxController {
   static WebviewMainController get to => Get.find();
-  final basicUrl = 'https://aptjoa.com/';
-  final emptyUrl = 'https://aptjoa.com/empty';
-  final loginUrl = 'https://aptjoa.com/user/login';
-  final homeUrl = 'https://aptjoa.com/user/my-info';
+
+  final basicUrl = 'http://43.200.37.141/'; // 개발서버
+  // final basicUrl = 'https://aptjoa.com/';
+  String get emptyUrl => '${basicUrl}empty';
+  String get loginUrl => '${basicUrl}user/login';
+  String get homeUrl => '${basicUrl}user/my-info';
   late WebViewController controller;
   late SharedPreferences prefs;
   final logger = Logger();
@@ -66,6 +68,7 @@ class WebviewMainController extends GetxController {
       await controller.runJavaScript(script);
       await controller.reload();
     }
+
   }
 
   Future<void> updatePrefs() async {
