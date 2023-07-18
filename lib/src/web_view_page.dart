@@ -53,7 +53,7 @@ class WebViewPageState extends State<WebViewPage> {
                         android: AndroidInAppWebViewOptions(
                             useHybridComposition: true,
                             allowContentAccess: true,
-                            builtInZoomControls: true,
+                            builtInZoomControls: false,
                             thirdPartyCookiesEnabled: true,
                             allowFileAccess: true,
                             supportMultipleWindows: true),
@@ -80,7 +80,7 @@ class WebViewPageState extends State<WebViewPage> {
                                   windowId: createWindowRequest.windowId,
                                   initialOptions: InAppWebViewGroupOptions(
                                     android: AndroidInAppWebViewOptions(
-                                      builtInZoomControls: true,
+                                      builtInZoomControls: false,
                                       thirdPartyCookiesEnabled: true,
                                     ),
                                     crossPlatform: InAppWebViewOptions(
