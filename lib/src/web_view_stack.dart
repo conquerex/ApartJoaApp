@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:apart_joa_app/src/webview_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -75,6 +73,7 @@ class _WebViewMainState extends State<WebViewMain> {
 
   @override
   Widget build(BuildContext context) {
+    logger.d(">>> web_view_stack.dart build()");
     // setToken();
     return Scaffold(
       body: Stack(

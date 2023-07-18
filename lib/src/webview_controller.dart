@@ -20,7 +20,7 @@ class WebviewMainController extends GetxController {
   var loginToken = '';
   var isInitController = true;
 
-  WebviewMainController() {
+  WebviewMainController() : controller = WebViewController() {
     _initializeController();
   }
 
@@ -68,7 +68,6 @@ class WebviewMainController extends GetxController {
       await controller.runJavaScript(script);
       await controller.reload();
     }
-
   }
 
   Future<void> updatePrefs() async {
@@ -112,6 +111,7 @@ class WebviewMainController extends GetxController {
   }
 
   WebViewController getController() {
+    logger.d(">>> webview_controller.dart::getController()");
     return controller;
   }
 }
