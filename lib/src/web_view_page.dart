@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WebViewPage extends StatefulWidget {
   const WebViewPage({Key? key}) : super(key: key);
@@ -10,16 +12,26 @@ class WebViewPage extends StatefulWidget {
 
 class WebViewPageState extends State<WebViewPage> {
   final GlobalKey webViewKey = GlobalKey();
+
   // final basicUrl = 'http://43.200.37.141/'; // 개발서버
   final basicUrl = 'https://aptjoa.com/';
+
+  // final basicUrl = 'https://66ba-59-10-74-16.ngrok-free.app/';
   late Uri myUrl;
   late final InAppWebViewController webViewController;
+  late SharedPreferences prefs;
   double progress = 0;
 
   @override
   void initState() {
     super.initState();
+    initPrefs();
     myUrl = Uri.parse(basicUrl);
+  }
+
+  // prefs 초기화
+  void initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
   }
 
   @override
@@ -62,7 +74,60 @@ class WebViewPageState extends State<WebViewPage> {
                           allowsBackForwardNavigationGestures: true,
                         ),
                       ),
-                      onLoadStop: (InAppWebViewController controller, uri) {
+                      onWebViewCreated: (InAppWebViewController controller) {
+                        print('>>>>> onWebViewCreated');
+                        webViewController = controller;
+                        // SharedPreferences prefs = await SharedPreferences.getInstance();
+                        if (prefs.containsKey('login-token')) {
+                          Fluttertoast.showToast(msg: "onWebViewCreated :: ${prefs.getString('login-token')}");
+                          print('>>>>> onWebViewCreated :: ${prefs.getString('login-token')}');
+                          // SharedPreferences에 저장된 로그인 토큰을 가져와서 localStorage에 저장
+                          controller.evaluateJavascript(source: """
+                            localStorage.setItem("login-token", "${prefs.getString('login-token')}");
+                          """);
+                        }
+                        controller.addJavaScriptHandler(
+                            handlerName: 'loginToken',
+                            callback: (args) {
+                              print('>>>>> loginToken : $args');
+                              setToken(args[0]);
+                            });
+                        controller.reload();
+                      },
+                      onLoadStart: (InAppWebViewController controller, uri) async {
+                        print('>>>>> onLoadStart : $uri');
+                        setState(() {
+                          myUrl = uri!;
+                        });
+                      },
+                      onLoadStop: (InAppWebViewController controller, uri) async {
+                        print('>>>>> onLoadStop : $uri');
+                        if (uri.toString().contains("${basicUrl}user/login")) {
+                          print('>>>>> onLoadStop : login');
+                          // 로그인시, 로그인 토큰을 가져와서 SharedPreferences에 저장
+                          controller.evaluateJavascript(source: """
+                            window.flutter_inappwebview.callHandler('loginToken', localStorage.getItem('login-token'));
+                          """);
+                          controller.reload();
+                        }
+
+                        if (uri.toString() == "${basicUrl}qna/list") {
+                          printToken();
+                        }
+
+                        if (uri.toString() == "${basicUrl}category/selectCategory") {
+                          controller.evaluateJavascript(source: """
+                            localStorage.clear();
+                          """);
+                        }
+
+                        if (uri.toString() == "${basicUrl}user/my-info") {
+                          // 로그아웃을 위한 핸들러
+                          controller.evaluateJavascript(source: """
+                            window.flutter_inappwebview.callHandler('loginToken', localStorage.getItem('login-token'));
+                          """);
+                        }
+
                         setState(() {
                           myUrl = uri!;
                         });
@@ -111,6 +176,28 @@ class WebViewPageState extends State<WebViewPage> {
                   ]))
                 ]))));
   }
+
+  /**
+   * 로그인 토큰을 SharedPreferences에 저장
+   */
+  Future<void> setToken(String? loginToken) async {
+    print('>>>>> setToken : $loginToken');
+    if (loginToken == null || loginToken == '') {
+      prefs.clear();
+      return;
+    }
+    prefs.setString('login-token', loginToken);
+  }
+
+  Future<void> clearTest() async {
+    prefs.clear();
+  }
+
+  Future<void> printToken() async {
+    print('>>>>> printToken : ${prefs.getString('login-token')}');
+  }
+
+  Future<void> callLoginToken(InAppWebViewController controller) async {}
 
   Future<bool> _goBack(BuildContext context) async {
     if (await webViewController.canGoBack()) {
