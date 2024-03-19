@@ -13,7 +13,7 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
@@ -26,17 +26,17 @@ EXTERNAL SOURCES:
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   shared_preferences_foundation:
-    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   webview_flutter_wkwebview:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  fluttertoast: fafc4fa4d01a6a9e4f772ecd190ffa525e9e2d9c
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   webview_flutter_wkwebview: 2e2d318f21a5e036e2c3f26171342e95908bd60a
 
 PODFILE CHECKSUM: 7f34e6f7ab242db2e66170ddd077fa2bf8dc867b
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.15.2
