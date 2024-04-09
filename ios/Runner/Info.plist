@@ -28,6 +28,10 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>카메라를 사용할 수 있도록 세팅해주세요</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>앨범을 사용할 수 있도록 세팅해주세요</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
