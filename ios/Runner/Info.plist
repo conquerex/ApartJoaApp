@@ -29,9 +29,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>카메라를 사용할 수 있도록 세팅해주세요</string>
+	<string>게시글에 참고할 수 있는 이미지 첨부를 위해 카메라 권한을 허락해 주세요.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>앨범을 사용할 수 있도록 세팅해주세요</string>
+	<string>게시글에 참고할 수 있는 이미지 첨부를 위해 앨범 권한을 허락해 주세요.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>게시글에 참고할 수 있는 영상 첨부를 위해 마이크 권한을 허락해 주세요.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
