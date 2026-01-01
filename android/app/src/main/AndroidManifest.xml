@@ -5,7 +5,8 @@
         android:label="아파트조아"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher_logo"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:extractNativeLibs="false">
         <activity
             android:name="app.aptjoa.apart_joa_app.MainActivity"
             android:exported="true"
