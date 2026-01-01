@@ -1,1 +1,0 @@
-/Users/hyeseong/dev/ApartJoaApp/android/app/build/intermediates/cxx/release/6y61o5oi/obj/arm64-v8a

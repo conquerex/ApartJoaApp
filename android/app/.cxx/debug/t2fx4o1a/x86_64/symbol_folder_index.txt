@@ -1,1 +1,0 @@
-/Users/hyeseong/dev/ApartJoaApp/android/app/build/intermediates/cxx/debug/t2fx4o1a/obj/x86_64
